@@ -18,6 +18,14 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
+// getEnv returns environment variable value or default if not set
+func getEnv(key, defaultValue string) string {
+	if value := os.Getenv(key); value != "" {
+		return value
+	}
+	return defaultValue
+}
+
 // TestResult represents the result of validating a single query
 type TestResult struct {
 	Name     string `json:"name"`
@@ -100,6 +108,13 @@ func loadConfig(configPath string) (*Config, error) {
 	if err := yaml.Unmarshal(data, &config); err != nil {
 		return nil, fmt.Errorf("could not parse config file: %w", err)
 	}
+
+	// Override with environment variables if set
+	config.Database.Host = getEnv("DB_HOST", config.Database.Host)
+	config.Database.DBName = getEnv("DB_NAME", config.Database.DBName)
+	config.Database.User = getEnv("DB_USER", config.Database.User)
+	config.Database.Password = getEnv("DB_PASSWORD", config.Database.Password)
+	config.Database.SSLMode = getEnv("DB_SSLMODE", config.Database.SSLMode)
 
 	return &config, nil
 }
