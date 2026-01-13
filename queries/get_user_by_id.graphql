@@ -1,0 +1,8 @@
+query GetUserById($id: Int!) {
+  users(where: { id: { eq: $id } }) {
+    id
+    name
+    email
+    created_at
+  }
+}

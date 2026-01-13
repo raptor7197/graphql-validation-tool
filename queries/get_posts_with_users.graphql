@@ -1,0 +1,13 @@
+query GetPostsWithUsers {
+  posts {
+    id
+    title
+    content
+    created_at
+    user {
+      id
+      name
+      email
+    }
+  }
+}

@@ -1,11 +1,10 @@
-# config.yaml
 database:
   type: "postgres"
   host: "localhost"
   port: 5432
-  dbname: "your_database"
-  user: "your_user"
-  password: "your_password"
+  dbname: "testdb"
+  user: "testuser"
+  password: "testpass"
   sslmode: "disable"
 
 production: false
