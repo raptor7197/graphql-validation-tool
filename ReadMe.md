@@ -1,36 +1,151 @@
-# GraphQL Validation Tool
+# GraphQL Validation Tool (gql-validate)
 
-A command-line tool for validating GraphQL queries against a PostgreSQL database using GraphJin.
+A powerful command-line tool for validating GraphQL queries against a PostgreSQL database using GraphJin.
 
 ## Features
 
-- Validates GraphQL queries against your database schema
-- Supports query variables via JSON files
-- Multiple output formats (text, JSON)
-- Detailed error reporting
-- Configurable via YAML and environment variables
-
-## Prerequisites
-
-- Go 1.16 or higher
-- PostgreSQL database
-- GraphQL queries to validate
+- 🔍 **Validate GraphQL queries** against your actual database schema
+- 📁 **Batch validation** of all queries in a directory
+- 📄 **Single file validation** for quick checks
+- 🔌 **Database connection testing** before running validations
+- 🚀 **Project scaffolding** with the `init` command
+- 📋 **List queries** with metadata and variable file detection
+- 🎨 **Multiple output formats** (text, JSON)
+- ⚡ **Fail-fast mode** for CI/CD pipelines
+- 🔧 **Environment variable support** for secure credential management
+- 🐚 **Shell completion** for bash, zsh, fish, and PowerShell
 
 ## Installation
 
+### From Source
+
 ```bash
-go build -o graphql-validator
+git clone https://github.com/your-repo/graphql-validation-tool.git
+cd graphql-validation-tool
+go build -o gql-validate .
+```
+
+### Move to PATH (optional)
+
+```bash
+sudo mv gql-validate /usr/local/bin/
+```
+
+## Quick Start
+
+```bash
+# Initialize a new project with sample config and queries
+gql-validate init
+
+# Edit config.yaml with your database credentials
+# Or set environment variables (recommended)
+export DB_HOST=localhost
+export DB_NAME=mydb
+export DB_USER=myuser
+export DB_PASSWORD=mypassword
+
+# Check database connection
+gql-validate check
+
+# Validate all queries
+gql-validate validate
+```
+
+## Commands
+
+### `validate` - Validate GraphQL Queries
+
+Validate GraphQL queries against your PostgreSQL database schema.
+
+```bash
+# Validate all queries in the default ./queries directory
+gql-validate validate
+
+# Validate all queries in a specific directory
+gql-validate validate -q ./my-queries
+
+# Validate a single query file
+gql-validate validate -f ./queries/get_user.graphql
+
+# Validate with verbose output
+gql-validate validate -v
+
+# Stop on first failure (useful for CI/CD)
+gql-validate validate --fail-fast
+
+# Output results as JSON
+gql-validate validate -j
+```
+
+### `check` - Check Database Connection
+
+Verify that the database connection is working correctly.
+
+```bash
+# Check connection using default config
+gql-validate check
+
+# Check connection with custom config
+gql-validate check -c /path/to/config.yaml
+
+# Check with verbose output (shows DB version and table count)
+gql-validate check -v
+```
+
+### `list` - List Available Queries
+
+List all GraphQL query files in a directory with metadata.
+
+```bash
+# List all queries in default directory
+gql-validate list
+
+# List queries in a specific directory
+gql-validate list -q ./my-queries
+
+# Show full file paths
+gql-validate list --full-path
+
+# Output as JSON
+gql-validate list -j
+```
+
+### `init` - Initialize a New Project
+
+Create a new project with sample configuration and query files.
+
+```bash
+# Initialize in current directory
+gql-validate init
+
+# Initialize in a specific directory
+gql-validate init -d ./my-project
+
+# Overwrite existing files
+gql-validate init --overwrite
+```
+
+### `completion` - Generate Shell Completion
+
+Generate autocompletion scripts for your shell.
+
+```bash
+# Bash
+gql-validate completion bash > /etc/bash_completion.d/gql-validate
+
+# Zsh
+gql-validate completion zsh > "${fpath[1]}/_gql-validate"
+
+# Fish
+gql-validate completion fish > ~/.config/fish/completions/gql-validate.fish
+
+# PowerShell
+gql-validate completion powershell > gql-validate.ps1
 ```
 
 ## Configuration
 
-### Database Setup
-
-You can configure the database connection in two ways:
-
-#### Option 1: Using config.yaml
-
-Edit `config.yaml` with your database credentials:
+### config.yaml
 
 ```yaml
 database:
@@ -45,77 +160,33 @@ database:
 production: false
 ```
 
-#### Option 2: Using Environment Variables (Recommended)
+### Environment Variables
 
-Set environment variables to override the config file:
+Environment variables take precedence over config.yaml values:
+
+| Variable      | Description                    |
+|---------------|--------------------------------|
+| `DB_HOST`     | Database host                  |
+| `DB_PORT`     | Database port                  |
+| `DB_NAME`     | Database name                  |
+| `DB_USER`     | Database user                  |
+| `DB_PASSWORD` | Database password              |
+| `DB_SSLMODE`  | SSL mode (disable/require/etc) |
+
+**Recommended:** Use environment variables for credentials to avoid storing passwords in files.
 
 ```bash
+# Create a .env file (don't commit to git!)
 export DB_HOST=localhost
-export DB_NAME=your_database
-export DB_USER=your_user
-export DB_PASSWORD=your_password
+export DB_PORT=5432
+export DB_NAME=mydb
+export DB_USER=myuser
+export DB_PASSWORD=secret
 export DB_SSLMODE=disable
-```
 
-Or create a `.env` file (copy from `.env.example`):
-
-```bash
-cp .env.example .env
-# Edit .env with your credentials
-```
-
-Then source it before running:
-
-```bash
+# Source it before running
 source .env
-./graphql-validator
-```
-
-**Note:** Environment variables take precedence over config.yaml values.
-
-## Usage
-
-### Basic Usage
-
-```bash
-./graphql-validator
-```
-
-This will use the default configuration (`config.yaml`) and look for queries in the `./queries` directory.
-
-### Command Line Options
-
-```bash
-./graphql-validator [options]
-
-Options:
-  -config string
-        Path to config file (default "config.yaml")
-  -queries string
-        Path to queries directory (default "./queries")
-  -verbose
-        Enable verbose output
-  -format string
-        Output format: text or json (default "text")
-```
-
-### Examples
-
-```bash
-# Use custom config file
-./graphql-validator -config /path/to/config.yaml
-
-# Use custom queries directory
-./graphql-validator -queries /path/to/queries
-
-# Verbose output
-./graphql-validator -verbose
-
-# JSON output format
-./graphql-validator -format json
-
-# Combine options
-./graphql-validator -config custom.yaml -queries ./my-queries -verbose -format json
+gql-validate validate
 ```
 
 ## Query Files
@@ -125,12 +196,12 @@ Place your GraphQL queries in the queries directory with `.graphql` extension:
 ```
 queries/
 ├── get_user.graphql
-├── get_user.json (optional variables)
+├── get_user.json          # Optional: variables for get_user.graphql
 ├── list_products.graphql
-└── list_products.json (optional variables)
+└── list_products.json     # Optional: variables for list_products.graphql
 ```
 
-### Query Example
+### Example Query
 
 **queries/get_user.graphql**
 ```graphql
@@ -139,11 +210,12 @@ query GetUser($id: Int!) {
     id
     name
     email
+    created_at
   }
 }
 ```
 
-**queries/get_user.json** (optional)
+**queries/get_user.json** (optional variables)
 ```json
 {
   "id": 1
@@ -152,21 +224,24 @@ query GetUser($id: Int!) {
 
 If no JSON file is provided, the query will be executed with empty variables `{}`.
 
-## Output
+## Output Formats
 
-### Text Format (Default)
+### Text Output (Default)
 
 ```
-Query Validation Results:
-========================
-✓ PASS: get_user.graphql (45ms)
-✗ FAIL: invalid_query.graphql (12ms)
-    Error: GraphQL execution error: column not found
+╔══════════════════════════════════════════════════════════════╗
+║            GraphQL Query Validation Results                  ║
+╚══════════════════════════════════════════════════════════════╝
 
-Summary: 2 tests, 1 passed, 1 failed
+  ✓ PASS  get_user.graphql                            45ms
+  ✗ FAIL  invalid_query.graphql                       12ms
+          └─ Execution error: column "nonexistent" does not exist
+
+──────────────────────────────────────────────────────────────────
+  Summary: 2 total, 1 passed, 1 failed
 ```
 
-### JSON Format
+### JSON Output (`-j` or `--json`)
 
 ```json
 {
@@ -184,7 +259,7 @@ Summary: 2 tests, 1 passed, 1 failed
       "name": "invalid_query.graphql",
       "path": "queries/invalid_query.graphql",
       "passed": false,
-      "error": "GraphQL execution error: column not found",
+      "errors": ["Execution error: column \"nonexistent\" does not exist"],
       "duration_ms": 12
     }
   ]
@@ -193,70 +268,93 @@ Summary: 2 tests, 1 passed, 1 failed
 
 ## Exit Codes
 
-- `0`: All queries passed validation
-- `1`: One or more queries failed validation
+| Code | Description                         |
+|------|-------------------------------------|
+| `0`  | All queries passed validation       |
+| `1`  | One or more queries failed          |
 
 This makes it easy to integrate into CI/CD pipelines:
 
 ```bash
-./graphql-validator || exit 1
+gql-validate validate || exit 1
 ```
+
+## CI/CD Integration
+
+### GitHub Actions
+
+```yaml
+- name: Validate GraphQL Queries
+  env:
+    DB_HOST: ${{ secrets.DB_HOST }}
+    DB_NAME: ${{ secrets.DB_NAME }}
+    DB_USER: ${{ secrets.DB_USER }}
+    DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+  run: |
+    ./gql-validate validate --fail-fast
+```
+
+### GitLab CI
+
+```yaml
+validate-queries:
+  script:
+    - ./gql-validate validate --fail-fast
+  variables:
+    DB_HOST: $DB_HOST
+    DB_NAME: $DB_NAME
+    DB_USER: $DB_USER
+    DB_PASSWORD: $DB_PASSWORD
+```
+
+## Global Flags
+
+These flags are available for all commands:
+
+| Flag              | Short | Description                      | Default        |
+|-------------------|-------|----------------------------------|----------------|
+| `--config`        | `-c`  | Config file path                 | `config.yaml`  |
+| `--verbose`       | `-v`  | Enable verbose output            | `false`        |
+| `--json`          | `-j`  | Output results as JSON           | `false`        |
+| `--help`          | `-h`  | Help for the command             |                |
+| `--version`       |       | Version information              |                |
 
 ## Troubleshooting
 
 ### Database Connection Errors
 
-If you see errors like:
-```
-failed to ping database: failed to connect to `host=localhost user=your_user database=your_database`
-```
+If you see connection errors:
 
-Make sure:
-1. PostgreSQL is running
-2. Database credentials are correct
-3. Database exists
-4. User has access to the database
-5. Host/port are correct
-
-### Testing Database Connection
+1. Verify PostgreSQL is running
+2. Check credentials in config.yaml or environment variables
+3. Ensure the database exists
+4. Verify network connectivity (host/port)
+5. Check SSL mode settings
 
 ```bash
-# Test with psql
-psql -h localhost -U your_user -d your_database
-
-# Or using environment variables
+# Test connection manually
 psql -h $DB_HOST -U $DB_USER -d $DB_NAME
+
+# Use the check command for detailed diagnostics
+gql-validate check -v
 ```
 
 ### Query Validation Errors
 
 If queries fail validation:
-- Check that your schema matches the query
-- Verify table and column names
-- Ensure relationships are properly defined
-- Check that required variables are provided in JSON files
 
-## Development
+- Check that table and column names match your schema
+- Verify relationships are properly defined in the database
+- Ensure required variables are provided in JSON files
+- Use `-v` for more detailed error information
 
-### Build
+## Dependencies
 
-```bash
-go build -o graphql-validator
-```
-
-### Run Tests
-
-```bash
-go test ./...
-```
-
-### Dependencies
-
-This tool uses:
 - [GraphJin](https://github.com/dosco/graphjin) - GraphQL to SQL compiler
 - [pgx](https://github.com/jackc/pgx) - PostgreSQL driver
+- [Cobra](https://github.com/spf13/cobra) - CLI framework
 - [yaml.v2](https://gopkg.in/yaml.v2) - YAML parser
 
 ## License
 
-[Add your license here]
+MIT License - see LICENSE file for details
