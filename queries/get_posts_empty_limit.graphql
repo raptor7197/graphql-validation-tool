@@ -1,0 +1,7 @@
+query GetAllPostsEmpty {
+  posts(limit: 0) {
+    id
+    title
+    content
+  }
+}

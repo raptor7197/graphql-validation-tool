@@ -1,0 +1,13 @@
+query SearchPostsByTitle($searchTerm: String!) {
+  posts(where: { title: { ilike: $searchTerm } }) {
+    id
+    title
+    content
+    created_at
+    user {
+      id
+      name
+      email
+    }
+  }
+}

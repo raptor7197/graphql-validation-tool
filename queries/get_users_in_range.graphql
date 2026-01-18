@@ -1,0 +1,12 @@
+query GetUsersInRange($minId: Int!, $maxId: Int!) {
+  users(where: { 
+    and: [
+      { id: { gte: $minId } },
+      { id: { lte: $maxId } }
+    ]
+  }) {
+    id
+    name
+    email
+  }
+}

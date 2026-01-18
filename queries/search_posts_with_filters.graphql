@@ -1,0 +1,21 @@
+query SearchPostsWithFilters($searchTerm: String!, $userId: Int!) {
+  posts(
+    where: { 
+      and: [
+        { title: { ilike: $searchTerm } },
+        { user_id: { eq: $userId } }
+      ]
+    }
+    order_by: { created_at: desc }
+  ) {
+    id
+    title
+    content
+    created_at
+    user {
+      id
+      name
+      email
+    }
+  }
+}

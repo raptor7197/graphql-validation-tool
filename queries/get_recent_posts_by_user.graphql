@@ -1,0 +1,20 @@
+query GetRecentPostsByUser($userId: Int!, $since: String!) {
+  posts(
+    where: { 
+      and: [
+        { user_id: { eq: $userId } },
+        { created_at: { gt: $since } }
+      ]
+    }
+    order_by: { created_at: desc }
+  ) {
+    id
+    title
+    content
+    created_at
+    user {
+      id
+      name
+    }
+  }
+}

@@ -1,0 +1,8 @@
+query SearchUsersByName($searchTerm: String!) {
+  users(where: { name: { ilike: $searchTerm } }) {
+    id
+    name
+    email
+    created_at
+  }
+}

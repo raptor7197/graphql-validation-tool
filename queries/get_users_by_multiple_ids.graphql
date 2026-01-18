@@ -1,0 +1,8 @@
+query GetUsersByMultipleIds($ids: [Int!]!) {
+  users(where: { id: { in: $ids } }) {
+    id
+    name
+    email
+    created_at
+  }
+}

@@ -1,0 +1,12 @@
+query GetPostsExcludingUser($excludeUserId: Int!) {
+  posts(where: { user_id: { neq: $excludeUserId } }) {
+    id
+    title
+    content
+    created_at
+    user {
+      id
+      name
+    }
+  }
+}

@@ -1,0 +1,10 @@
+mutation DeleteUser($id: Int!) {
+  users(
+    where: { id: { eq: $id } }
+    delete: true
+  ) {
+    id
+    name
+    email
+  }
+}

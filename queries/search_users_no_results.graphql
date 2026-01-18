@@ -1,0 +1,7 @@
+query SearchUsersNoResults($searchTerm: String!) {
+  users(where: { name: { ilike: $searchTerm } }) {
+    id
+    name
+    email
+  }
+}

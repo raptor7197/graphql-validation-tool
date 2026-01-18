@@ -1,0 +1,16 @@
+mutation CreatePost($userId: Int!, $title: String!, $content: String!) {
+  posts(insert: {
+    user_id: $userId
+    title: $title
+    content: $content
+  }) {
+    id
+    title
+    content
+    created_at
+    user {
+      id
+      name
+    }
+  }
+}

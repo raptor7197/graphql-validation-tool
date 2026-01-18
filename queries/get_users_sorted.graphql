@@ -1,0 +1,8 @@
+query GetUsersSorted {
+  users(order_by: { created_at: desc, name: asc }) {
+    id
+    name
+    email
+    created_at
+  }
+}

@@ -1,0 +1,17 @@
+query GetPostsPaginated($limit: Int!, $offset: Int!) {
+  posts(
+    limit: $limit
+    offset: $offset
+    order_by: { created_at: desc }
+  ) {
+    id
+    title
+    content
+    created_at
+    user {
+      id
+      name
+      email
+    }
+  }
+}

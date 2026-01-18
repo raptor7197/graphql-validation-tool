@@ -1,0 +1,12 @@
+query GetPostsSorted {
+  posts(order_by: { created_at: desc }) {
+    id
+    title
+    content
+    created_at
+    user {
+      id
+      name
+    }
+  }
+}

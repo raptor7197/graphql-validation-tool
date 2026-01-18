@@ -1,0 +1,12 @@
+query GetUsersPaginated($limit: Int!, $offset: Int!) {
+  users(
+    limit: $limit
+    offset: $offset
+    order_by: { id: asc }
+  ) {
+    id
+    name
+    email
+    created_at
+  }
+}

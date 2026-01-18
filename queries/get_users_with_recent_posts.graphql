@@ -1,0 +1,15 @@
+query GetUsersWithRecentPosts($limit: Int!) {
+  users {
+    id
+    name
+    email
+    posts(
+      limit: $limit
+      order_by: { created_at: desc }
+    ) {
+      id
+      title
+      created_at
+    }
+  }
+}

@@ -1,0 +1,14 @@
+mutation UpdateUser($id: Int!, $name: String, $email: String) {
+  users(
+    where: { id: { eq: $id } }
+    update: {
+      name: $name
+      email: $email
+    }
+  ) {
+    id
+    name
+    email
+    created_at
+  }
+}

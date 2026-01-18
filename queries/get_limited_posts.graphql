@@ -1,0 +1,10 @@
+query GetLimitedPosts($limit: Int!) {
+  posts(
+    limit: $limit
+    order_by: { created_at: desc }
+  ) {
+    id
+    title
+    created_at
+  }
+}

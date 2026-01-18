@@ -1,0 +1,11 @@
+query GetPostsByNonExistentUser($userId: Int!) {
+  posts(where: { user_id: { eq: $userId } }) {
+    id
+    title
+    content
+    user {
+      id
+      name
+    }
+  }
+}

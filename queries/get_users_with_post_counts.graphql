@@ -1,0 +1,11 @@
+query GetAllUsersWithPostCounts {
+  users {
+    id
+    name
+    email
+    posts {
+      id
+      title
+    }
+  }
+}

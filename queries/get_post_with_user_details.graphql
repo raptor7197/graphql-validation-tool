@@ -1,0 +1,18 @@
+query GetPostWithUserDetails($postId: Int!) {
+  posts(where: { id: { eq: $postId } }) {
+    id
+    title
+    content
+    created_at
+    user {
+      id
+      name
+      email
+      created_at
+      posts {
+        id
+        title
+      }
+    }
+  }
+}
