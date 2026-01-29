@@ -69,7 +69,7 @@ func runList(cmd *cobra.Command, args []string) error {
 			return err
 		}
 
-		if !info.IsDir() && strings.HasSuffix(info.Name(), ".graphql") {
+		if !info.IsDir() && (strings.HasSuffix(info.Name(), ".graphql") || strings.HasSuffix(info.Name(), ".gql")) {
 			query := QueryInfo{
 				Name:      info.Name(),
 				Path:      path,
@@ -77,10 +77,18 @@ func runList(cmd *cobra.Command, args []string) error {
 			}
 
 			// Check for corresponding JSON file
-			jsonFile := strings.TrimSuffix(path, ".graphql") + ".json"
-			if _, err := os.Stat(jsonFile); err == nil {
-				query.HasVars = true
-				query.VarsFile = jsonFile
+			var jsonFile string
+			if strings.HasSuffix(path, ".graphql") {
+				jsonFile = strings.TrimSuffix(path, ".graphql") + ".json"
+			} else if strings.HasSuffix(path, ".gql") {
+				jsonFile = strings.TrimSuffix(path, ".gql") + ".json"
+			}
+
+			if jsonFile != "" {
+				if _, err := os.Stat(jsonFile); err == nil {
+					query.HasVars = true
+					query.VarsFile = jsonFile
+				}
 			}
 
 			// Try to extract description from first comment line

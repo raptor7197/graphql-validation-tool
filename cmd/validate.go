@@ -169,7 +169,7 @@ func findQueryFiles(dir string) ([]string, error) {
 			return err
 		}
 
-		if !info.IsDir() && strings.HasSuffix(info.Name(), ".graphql") {
+		if !info.IsDir() && (strings.HasSuffix(info.Name(), ".graphql") || strings.HasSuffix(info.Name(), ".gql")) {
 			queryFiles = append(queryFiles, path)
 		}
 
@@ -221,20 +221,30 @@ func validateSingleQuery(gj *graphjin.GraphJin, queryPath string) TestResult {
 	}
 
 	// Look for corresponding JSON file with variables
-	jsonFile := strings.TrimSuffix(queryPath, ".graphql") + ".json"
+	var jsonFile string
+	if strings.HasSuffix(queryPath, ".graphql") {
+		jsonFile = strings.TrimSuffix(queryPath, ".graphql") + ".json"
+	} else if strings.HasSuffix(queryPath, ".gql") {
+		jsonFile = strings.TrimSuffix(queryPath, ".gql") + ".json"
+	}
+
 	var variables json.RawMessage
 
-	if _, err := os.Stat(jsonFile); err == nil {
-		jsonData, err := os.ReadFile(jsonFile)
-		if err != nil {
-			result.Errors = append(result.Errors, fmt.Sprintf("Failed to read variables file: %v", err))
-			result.Duration = time.Since(start).Milliseconds()
-			return result
-		}
-		variables = json.RawMessage(jsonData)
+	if jsonFile != "" {
+		if _, err := os.Stat(jsonFile); err == nil {
+			jsonData, err := os.ReadFile(jsonFile)
+			if err != nil {
+				result.Errors = append(result.Errors, fmt.Sprintf("Failed to read variables file: %v", err))
+				result.Duration = time.Since(start).Milliseconds()
+				return result
+			}
+			variables = json.RawMessage(jsonData)
 
-		if verbose {
-			fmt.Printf("  Using variables from: %s\n", filepath.Base(jsonFile))
+			if verbose {
+				fmt.Printf("  Using variables from: %s\n", filepath.Base(jsonFile))
+			}
+		} else {
+			variables = json.RawMessage("{}")
 		}
 	} else {
 		variables = json.RawMessage("{}")
