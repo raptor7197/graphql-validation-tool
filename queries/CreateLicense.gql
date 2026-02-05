@@ -1,0 +1,8 @@
+mutation CreateLicense($input: insertlicense_and_registrationInput!) {
+  license_and_registration(insert: $input) {
+    id
+    customer_id
+    license_registration_fileobject_id
+    __typename
+  }
+}

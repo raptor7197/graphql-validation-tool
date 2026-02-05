@@ -1,0 +1,6 @@
+query GetCustomersCount {
+  customers {
+    count_id
+    __typename
+  }
+}

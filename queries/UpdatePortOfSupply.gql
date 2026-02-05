@@ -1,0 +1,9 @@
+mutation UpdatePortOfSupply($input: UpdatePortOfSupplyInput!, $id: bigint!) {
+  ports(update: $input, where: {id: {_eq: $id}}) {
+    id
+    name
+    country
+    status
+    __typename
+  }
+}

@@ -1,0 +1,10 @@
+query GetOrderCustomerLinks {
+  orders_customers_onlink {
+    customer {
+      id
+      customer_name
+      __typename
+    }
+    __typename
+  }
+}

@@ -1,0 +1,6 @@
+query GetOrdersMaxId {
+  orders {
+    max_id
+    __typename
+  }
+}

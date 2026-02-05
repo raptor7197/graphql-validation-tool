@@ -1,0 +1,6 @@
+mutation BulkCreateEnquiryCustomers($inputs: [insertenquiries_customers_onlinkInput!]!) {
+  enquiries_customers_onlink(insert: $inputs) {
+    id
+    __typename
+  }
+}

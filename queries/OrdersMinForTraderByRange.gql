@@ -1,0 +1,21 @@
+query OrdersMinForTraderByRange($start: date, $end: date) {
+  orders(
+    where: {_and: [{date_of_order: {_gte: $start}}, {date_of_order: {_lte: $end}}]}
+    orderBy: {created_at: desc}
+  ) {
+    date_of_order
+    trader_customer_id
+    trader_supplier_id
+    trader_customer {
+      first_name
+      last_name
+      __typename
+    }
+    trader_supplier {
+      first_name
+      last_name
+      __typename
+    }
+    __typename
+  }
+}

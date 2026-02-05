@@ -1,0 +1,8 @@
+query GetCustomerDetails($id: String!) {
+  customers(where: {id: {_eq: $id}}) {
+    operational_contact_name
+    operational_contact_number
+    operational_contact_email
+    __typename
+  }
+}

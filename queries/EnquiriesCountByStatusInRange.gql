@@ -1,0 +1,8 @@
+query EnquiriesCountByStatusInRange($status: String!, $start: date, $end: date) {
+  enquiries(
+    where: {_and: [{status: {_eq: $status}}, {date_of_enquiry: {_gte: $start}}, {date_of_enquiry: {_lte: $end}}]}
+  ) {
+    count_id
+    __typename
+  }
+}

@@ -1,0 +1,10 @@
+mutation UpdateETA($id: ID!, $actual_supply_date: DateTime) {
+  orders(
+    update: { actual_supply_date: $actual_supply_date }
+    where: { id: { _eq: $id } }
+  ) {
+    id
+    unique_text_id
+    __typename
+  }
+}

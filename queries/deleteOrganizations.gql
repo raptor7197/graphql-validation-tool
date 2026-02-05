@@ -1,0 +1,5 @@
+mutation deleteOrganizations($organizationID: ID) {
+  organization(delete: true, where: { id: { equals: $organizationID } }) {
+    id
+  }
+}

@@ -1,0 +1,10 @@
+mutation CreateOrderSupplierLink($input: insertorders_suppliers_onlinkInput!) {
+  orders_suppliers_onlink(insert: $input) {
+    id
+    order_id
+    supplier_id
+    created_at
+    updated_at
+    __typename
+  }
+}

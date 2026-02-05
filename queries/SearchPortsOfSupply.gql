@@ -1,0 +1,14 @@
+query SearchPortsOfSupply($searchTerm: String, $limit: Int!, $offset: Int!) {
+  ports(
+    where: {_or: [{name: {_ilike: $searchTerm}}, {country: {_ilike: $searchTerm}}]}
+    limit: $limit
+    offset: $offset
+    orderBy: {name: asc}
+  ) {
+    id
+    name
+    country
+    status
+    __typename
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "input": {
+    "status": "",
+    "date_of_enquiry": "",
+    "vessel_id": 0.0,
+    "trader_id": 0.0,
+    "port_of_supply_id": 0.0,
+    "duty_paid": false,
+    "laycan_start_date": "",
+    "laycan_end_date": "",
+    "notes": ""
+  }
+}

@@ -1,0 +1,9 @@
+query GetTraders {
+  users(orderBy: {first_name: asc}) {
+    nimbus_user_id
+    first_name
+    last_name
+    email
+    __typename
+  }
+}

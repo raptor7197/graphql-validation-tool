@@ -1,0 +1,5 @@
+mutation UpdateEnquiry($id: ID!, $input: updateenquiriesInput!) {
+  enquiries(update: $input, where: {id: {_eq: $id}}) {
+    __typename
+  }
+}

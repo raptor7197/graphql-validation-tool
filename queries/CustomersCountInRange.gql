@@ -1,0 +1,8 @@
+query CustomersCountInRange($start: timestamptz, $end: timestamptz) {
+  customers(
+    where: {_and: [{created_at: {_gte: $start}}, {created_at: {_lte: $end}}]}
+  ) {
+    count_id
+    __typename
+  }
+}

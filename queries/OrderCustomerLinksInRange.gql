@@ -1,0 +1,12 @@
+query OrderCustomerLinksInRange($start: date, $end: date) {
+  orders_customers_onlink(
+    where: {order: {_and: [{date_of_order: {_gte: $start}}, {date_of_order: {_lte: $end}}]}}
+  ) {
+    customer {
+      id
+      customer_name
+      __typename
+    }
+    __typename
+  }
+}

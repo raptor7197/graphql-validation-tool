@@ -1,0 +1,8 @@
+query EnquiriesForQuarterInRange($start: String, $end: String) {
+  enquiries(
+    where: {_and: [{date_of_enquiry: {_gte: $start}}, {date_of_enquiry: {_lte: $end}}]}
+  ) {
+    date_of_enquiry
+    __typename
+  }
+}

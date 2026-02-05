@@ -1,0 +1,9 @@
+query GetPaginatedPortsOfSupply($limit: Int!, $offset: Int!) {
+  ports(limit: $limit, offset: $offset, orderBy: {name: asc}) {
+    id
+    name
+    country
+    status
+    __typename
+  }
+}

@@ -1,0 +1,9 @@
+mutation DeleteOrderLineItems($order_id: ID!) {
+  lineitems_order_on_product_link(
+    where: {order_id: {_eq: $order_id}}
+    delete: true
+  ) {
+    id
+    __typename
+  }
+}

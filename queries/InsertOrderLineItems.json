@@ -1,0 +1,18 @@
+{
+  "line_items": [
+    {
+      "order_id": 0.0,
+      "product_id": 0.0,
+      "specification_id": 0.0,
+      "uom": "",
+      "supply_quantity": 0.0,
+      "purchase_price_per_uom": 0.0,
+      "sale_price_per_uom": 0.0,
+      "transportation_invoice_eligibility": false,
+      "transportation_cost_per_uom": 0.0,
+      "surveyor_cost_applicability": false,
+      "surveyor_cost_per_uom": 0.0,
+      "conversion_factor": 0.0
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+query SearchVessels($searchTerm: String, $limit: Int!, $offset: Int!) {
+  vessels(
+    where: {_or: [{name: {_ilike: $searchTerm}}, {imo: {_ilike: $searchTerm}}, {ship_type: {_ilike: $searchTerm}}]}
+    limit: $limit
+    offset: $offset
+    orderBy: {name: asc}
+  ) {
+    id
+    name
+    imo
+    status
+    dead_weight
+    ship_type
+    __typename
+  }
+}

@@ -1,0 +1,9 @@
+query GetPorts {
+  ports {
+    id
+    name
+    country
+    status
+    __typename
+  }
+}

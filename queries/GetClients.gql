@@ -1,0 +1,16 @@
+query GetClients {
+  clients {
+    id
+    customer_name
+    customer_address
+    customer_contact_name
+    customer_contact_number
+    customer_contact_email
+    size
+    license_and_registration
+    credit_limit
+    currency_for_credit_limit
+    country_of_incorporation
+    __typename
+  }
+}

@@ -1,0 +1,36 @@
+mutation CreateCompleteEnquiry($input: insertenquiriesInput!) {
+  enquiries(insert: $input) {
+    id
+    unique_text_id
+    status
+    date_of_enquiry
+    vessel_id
+    trader_id
+    port_of_supply_id
+    duty_paid
+    laycan_start_date
+    laycan_end_date
+    notes
+    created_at
+    updated_at
+    enquiries_customers_onlink {
+      id
+      enquiry_id
+      customer_id
+      created_at
+      __typename
+    }
+    enquiry_line_items_onlink {
+      id
+      enquiry_id
+      product_id
+      specification_id
+      uom_of_supply
+      quantity_minimum
+      quantity_maximum
+      created_at
+      __typename
+    }
+    __typename
+  }
+}

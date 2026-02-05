@@ -1,0 +1,11 @@
+query GetVessels($limit: Int!, $offset: Int!) {
+  vessels(limit: $limit, offset: $offset, orderBy: {name: asc}) {
+    id
+    name
+    imo
+    status
+    dead_weight
+    ship_type
+    __typename
+  }
+}

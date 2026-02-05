@@ -1,0 +1,7 @@
+query GetVessel($id: Int!) {
+  vessels(where: {id: {_eq: $id}}) {
+    name
+    imo
+    __typename
+  }
+}

@@ -1,0 +1,10 @@
+query OrdersWithPricesInRange($start: date, $end: date) {
+  orders(
+    where: {_and: [{date_of_order: {_gte: $start}}, {date_of_order: {_lte: $end}}]}
+  ) {
+    total_sale_price
+    order_currency
+    exchange_rate
+    __typename
+  }
+}

@@ -1,0 +1,36 @@
+query SearchCustomers($searchTerm: String, $limit: Int!, $offset: Int!) {
+  customers(
+    where: {_or: [{unique_id: {_ilike: $searchTerm}}, {customer_name: {_ilike: $searchTerm}}, {customer_address: {_ilike: $searchTerm}}, {customer_contact_name: {_ilike: $searchTerm}}, {customer_contact_number: {_ilike: $searchTerm}}, {customer_contact_email: {_ilike: $searchTerm}}, {operational_contact_name: {_ilike: $searchTerm}}, {operational_contact_number: {_ilike: $searchTerm}}, {operational_contact_email: {_ilike: $searchTerm}}, {country_of_incorporation: {_ilike: $searchTerm}}, {currency_for_credit_limit: {_ilike: $searchTerm}}]}
+    limit: $limit
+    offset: $offset
+    orderBy: {customer_name: asc}
+  ) {
+    id
+    unique_id
+    customer_name
+    customer_address
+    customer_contact_name
+    customer_contact_number
+    customer_contact_email
+    operational_contact_name
+    operational_contact_number
+    operational_contact_email
+    size
+    credit_limit
+    currency_for_credit_limit
+    country_of_incorporation
+    insured
+    blacklisted
+    created_at
+    updated_at
+    license_and_registration {
+      id
+      customer_id
+      license_registration_fileobject_id
+      created_at
+      updated_at
+      __typename
+    }
+    __typename
+  }
+}

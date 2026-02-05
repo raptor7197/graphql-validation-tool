@@ -1,0 +1,72 @@
+mutation CreateCompleteTrade($input: insertordersInput!) {
+  orders(insert: $input) {
+    id
+    unique_text_id
+    status
+    date_of_order
+    vessel_id
+    port_of_supply_id
+    seller_entity
+    customer_payment_terms
+    supplier_payment_terms
+    order_currency
+    exchange_rate
+    supplier_exchange_rate
+    discounted_order
+    laycan_start_date
+    laycan_end_date
+    earliest_supply
+    email_to_notify
+    price_valid
+    agents
+    enquiry_id
+    customer_operational_contact_name
+    customer_operational_contact_number
+    customer_operational_contact_email
+    trader_customer_id
+    trader_supplier_id
+    actual_supply_date
+    notes
+    physical_supplier
+    remarks
+    total_sale_price
+    nomination_general_terms
+    confirmation_general_terms
+    created_at
+    updated_at
+    orders_customers_onlink {
+      id
+      order_id
+      customer_id
+      created_at
+      __typename
+    }
+    orders_suppliers_onlink {
+      id
+      order_id
+      supplier_id
+      created_at
+      __typename
+    }
+    lineitems_order_on_product_link {
+      id
+      order_id
+      product_id
+      specification_id
+      uom
+      supply_quantity
+      quantity_minimum
+      quantity_maximum
+      purchase_price_per_uom
+      sale_price_per_uom
+      transportation_invoice_eligibility
+      transportation_cost_per_uom
+      surveyor_cost_applicability
+      surveyor_cost_per_uom
+      conversion_factor
+      created_at
+      __typename
+    }
+    __typename
+  }
+}

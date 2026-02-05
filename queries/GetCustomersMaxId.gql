@@ -1,0 +1,6 @@
+query GetCustomersMaxId {
+  customers {
+    max_id
+    __typename
+  }
+}

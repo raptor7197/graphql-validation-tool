@@ -1,0 +1,21 @@
+mutation CreateSupplier($input: insertsuppliersInput!) {
+  suppliers(insert: $input) {
+    id
+    unique_id
+    supplier_name
+    supplier_address
+    supplier_contact_name
+    supplier_contact_number
+    supplier_contact_email
+    operational_contact_name
+    operational_contact_number
+    operational_contact_email
+    size
+    credit_limit
+    currency_for_credit_limit
+    country_of_incorporation
+    insured
+    blacklisted
+    __typename
+  }
+}

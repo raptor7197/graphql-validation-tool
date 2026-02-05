@@ -1,0 +1,9 @@
+mutation UpdateEnquiryOrderNumber($id: ID!, $order_number: String!) {
+  enquiries(
+    update: { order_number: $order_number }
+    where: { id: { _eq: $id } }
+  ) {
+    id
+    __typename
+  }
+}

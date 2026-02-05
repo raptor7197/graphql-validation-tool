@@ -1,0 +1,6 @@
+mutation UpdateClient($id: ID!, $input: updateclientsInput!) {
+  clients(update: $input, where: { id: { _eq: $id } }) {
+    id
+    __typename
+  }
+}

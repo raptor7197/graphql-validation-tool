@@ -1,0 +1,152 @@
+query SearchOrders($searchTerm: String, $limit: Int!, $offset: Int!) {
+  orders(
+    where: {_or: [{unique_text_id: {_ilike: $searchTerm}}, {seller_entity: {_ilike: $searchTerm}}, {order_currency: {_ilike: $searchTerm}}, {email_to_notify: {_ilike: $searchTerm}}, {customer_operational_contact_name: {_ilike: $searchTerm}}, {customer_operational_contact_email: {_ilike: $searchTerm}}, {physical_supplier: {_ilike: $searchTerm}}, {remarks: {_ilike: $searchTerm}}, {vessel: {name: {_ilike: $searchTerm}}}, {vessel: {imo: {_ilike: $searchTerm}}}, {port_of_supply: {name: {_ilike: $searchTerm}}}, {port_of_supply: {country: {_ilike: $searchTerm}}}, {trader_customer: {first_name: {_ilike: $searchTerm}}}, {trader_customer: {last_name: {_ilike: $searchTerm}}}, {trader_supplier: {first_name: {_ilike: $searchTerm}}}, {trader_supplier: {last_name: {_ilike: $searchTerm}}}, {orders_customers_onlink: {customer: {customer_name: {_ilike: $searchTerm}}}}, {orders_customers_onlink: {customer: {customer_contact_name: {_ilike: $searchTerm}}}}, {orders_customers_onlink: {customer: {customer_contact_email: {_ilike: $searchTerm}}}}, {orders_suppliers_onlink: {supplier: {supplier_name: {_ilike: $searchTerm}}}}, {orders_suppliers_onlink: {supplier: {supplier_contact_name: {_ilike: $searchTerm}}}}, {orders_suppliers_onlink: {supplier: {supplier_contact_email: {_ilike: $searchTerm}}}}, {lineitems_order_on_product_link: {product: {name: {_ilike: $searchTerm}}}}]}
+    limit: $limit
+    offset: $offset
+  ) {
+    id
+    unique_text_id
+    trader_customer_id
+    trader_supplier_id
+    status
+    date_of_order
+    vessel {
+      id
+      name
+      imo
+      status
+      dead_weight
+      ship_type
+      __typename
+    }
+    port_of_supply {
+      id
+      name
+      country
+      status
+      __typename
+    }
+    seller_entity
+    customer_payment_terms
+    supplier_payment_terms
+    order_currency
+    exchange_rate
+    supplier_exchange_rate
+    discounted_order
+    laycan_start_date
+    laycan_end_date
+    earliest_supply
+    email_to_notify
+    price_valid
+    agents
+    order_nomination_pdf_url
+    order_confirmation_pdf_url
+    enquiry {
+      id
+      unique_text_id
+      date_of_enquiry
+      __typename
+    }
+    customer_operational_contact_name
+    customer_operational_contact_number
+    customer_operational_contact_email
+    trader_customer {
+      first_name
+      last_name
+      __typename
+    }
+    trader_supplier {
+      first_name
+      last_name
+      __typename
+    }
+    actual_supply_date
+    notes
+    invoice_date
+    tax_invoice_file_id
+    bdn_file_id
+    physical_supplier
+    total_sale_price
+    remarks
+    created_at
+    updated_at
+    lineitems_order_on_product_link {
+      id
+      product {
+        id
+        name
+        __typename
+      }
+      specification {
+        id
+        specification
+        __typename
+      }
+      uom
+      supply_quantity
+      quantity_minimum
+      quantity_maximum
+      purchase_price_per_uom
+      sale_price_per_uom
+      transportation_invoice_eligibility
+      transportation_cost_per_uom
+      surveyor_cost_applicability
+      surveyor_cost_per_uom
+      conversion_factor
+      created_at
+      updated_at
+      __typename
+    }
+    orders_customers_onlink {
+      id
+      customer {
+        id
+        unique_id
+        customer_name
+        customer_address
+        customer_contact_name
+        customer_contact_number
+        customer_contact_email
+        operational_contact_name
+        operational_contact_number
+        operational_contact_email
+        size
+        credit_limit
+        currency_for_credit_limit
+        country_of_incorporation
+        insured
+        blacklisted
+        __typename
+      }
+      created_at
+      updated_at
+      __typename
+    }
+    orders_suppliers_onlink {
+      id
+      supplier {
+        id
+        unique_id
+        supplier_name
+        supplier_address
+        supplier_contact_name
+        supplier_contact_number
+        supplier_contact_email
+        operational_contact_name
+        operational_contact_number
+        operational_contact_email
+        size
+        credit_limit
+        currency_for_credit_limit
+        country_of_incorporation
+        insured
+        blacklisted
+        __typename
+      }
+      created_at
+      updated_at
+      __typename
+    }
+    __typename
+  }
+}

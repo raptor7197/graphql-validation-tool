@@ -1,0 +1,8 @@
+query GetSpecs {
+  specifications(orderBy: {product_id: asc}) {
+    id
+    product_id
+    specification
+    __typename
+  }
+}

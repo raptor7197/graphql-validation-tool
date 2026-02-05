@@ -1,0 +1,6 @@
+mutation DeleteLicense($customerId: String!) {
+  license_and_registration(delete: true, where: {customer_id: {_eq: $customerId}}) {
+    id
+    __typename
+  }
+}

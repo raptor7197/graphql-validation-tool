@@ -1,0 +1,8 @@
+query GetOrdersWithPrices {
+  orders {
+    total_sale_price
+    order_currency
+    exchange_rate
+    __typename
+  }
+}

@@ -1,0 +1,16 @@
+query GetCustomerWithId($id: String!) {
+  customers(id: $id) {
+    id
+    customer_name
+    customer_address
+    customer_contact_name
+    customer_contact_number
+    customer_contact_email
+    operational_contact_name
+    operational_contact_number
+    operational_contact_email
+    size
+    credit_limit
+    currency_for_credit_limit
+  }
+}

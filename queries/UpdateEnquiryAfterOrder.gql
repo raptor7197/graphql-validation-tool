@@ -1,0 +1,7 @@
+mutation UpdateEnquiryAfterOrder($enquiry_id: ID!, $status: String) {
+  enquiries(id: $enquiry_id, update: {status: $status}) {
+    id
+    status
+    __typename
+  }
+}

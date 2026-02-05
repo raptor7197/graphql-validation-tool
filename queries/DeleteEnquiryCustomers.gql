@@ -1,0 +1,9 @@
+mutation DeleteEnquiryCustomers($enquiry_id: ID!) {
+  enquiries_customers_onlink(
+    delete: true
+    where: {enquiry_id: {_eq: $enquiry_id}}
+  ) {
+    id
+    __typename
+  }
+}

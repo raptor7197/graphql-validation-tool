@@ -1,0 +1,6 @@
+query GetOrdersCountBySeller($seller: String!) {
+  orders(where: {seller_entity: {_eq: $seller}}) {
+    count_id
+    __typename
+  }
+}

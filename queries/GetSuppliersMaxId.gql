@@ -1,0 +1,6 @@
+query GetSuppliersMaxId {
+  suppliers {
+    max_id
+    __typename
+  }
+}

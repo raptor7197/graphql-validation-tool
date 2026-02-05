@@ -1,0 +1,62 @@
+{
+  "input": {
+    "unique_text_id": "",
+    "status": "",
+    "date_of_order": "",
+    "vessel_id": 0.0,
+    "port_of_supply_id": 0.0,
+    "seller_entity": "",
+    "payment_terms": 0.0,
+    "order_currency": "",
+    "exchange_rate": 0.0,
+    "supplier_exchange_rate": 0.0,
+    "discounted_order": "",
+    "laycan_start_date": "",
+    "laycan_end_date": "",
+    "earliest_supply": "",
+    "email_to_notify": "",
+    "price_valid": "",
+    "agents": "",
+    "order_nomination_pdf_url": "",
+    "order_confirmation_pdf_url": "",
+    "enquiry_id": 0.0,
+    "customer_operational_contact_name": "",
+    "customer_operational_contact_number": "",
+    "customer_operational_contact_email": "",
+    "trader_customer_id": 0.0,
+    "trader_supplier_id": 0.0,
+    "actual_supply_date": null,
+    "notes": "",
+    "invoice_date": null,
+    "lineitems_order_on_product_link": [
+      {
+        "product_id": 0.0,
+        "specification_id": 0.0,
+        "uom": "",
+        "supply_quantity": 0.0,
+        "quantity_minimum": null,
+        "quantity_maximum": null,
+        "purchase_price_per_uom": 0.0,
+        "sale_price_per_uom": 0.0,
+        "transportation_invoice_eligibility": false,
+        "transportation_cost_per_uom": 0.0,
+        "surveyor_cost_applicability": false,
+        "surveyor_cost_per_uom": 0.0,
+        "conversion_factor": 0.0
+      }
+    ],
+    "orders_customers_onlink": [
+      {
+        "customer_id": 0.0
+      }
+    ],
+    "orders_suppliers_onlink": [
+      {
+        "supplier_id": 0.0
+      }
+    ],
+    "total_sale_price": 0.0,
+    "bdn_file_id": null,
+    "tax_invoice_file_id": null
+  }
+}

@@ -1,0 +1,22 @@
+query LatestEnquiriesInRange($start: String, $end: String) {
+  enquiries(
+    limit: 1000
+    where: {_and: [{date_of_enquiry: {_gte: $start}}, {date_of_enquiry: {_lte: $end}}]}
+    orderBy: {date_of_enquiry: desc}
+  ) {
+    id
+    date_of_enquiry
+    trader {
+      nimbus_user_id
+      first_name
+      last_name
+      __typename
+    }
+    port_of_supply {
+      id
+      name
+      __typename
+    }
+    __typename
+  }
+}

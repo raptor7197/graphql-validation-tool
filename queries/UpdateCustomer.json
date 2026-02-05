@@ -1,0 +1,18 @@
+{
+  "input": {
+    "customer_name": "",
+    "customer_address": "",
+    "customer_contact_name": "",
+    "customer_contact_number": "",
+    "customer_contact_email": "",
+    "operational_contact_name": "",
+    "operational_contact_number": "",
+    "operational_contact_email": "",
+    "size": "",
+    "credit_limit": 0.0,
+    "currency_for_credit_limit": "",
+    "country_of_incorporation": "",
+    "insured": false,
+    "blacklisted": false
+  }
+}

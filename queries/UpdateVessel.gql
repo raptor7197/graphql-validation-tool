@@ -1,0 +1,11 @@
+mutation UpdateVessel($input: UpdateVesselInput!, $id: bigint!) {
+  vessels(update: $input, where: {id: {_eq: $id}}) {
+    id
+    name
+    imo
+    status
+    dead_weight
+    ship_type
+    __typename
+  }
+}

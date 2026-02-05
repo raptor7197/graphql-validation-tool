@@ -1,0 +1,10 @@
+mutation CreateTrader($input: inserttradersInput!) {
+  traders(insert: $input) {
+    id
+    first_name
+    last_name
+    username
+    email
+    __typename
+  }
+}

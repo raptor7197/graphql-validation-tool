@@ -1,0 +1,8 @@
+query OrdersCountByStatusInRange($status: String!, $start: date, $end: date) {
+  orders(
+    where: {_and: [{status: {_eq: $status}}, {date_of_order: {_gte: $start}}, {date_of_order: {_lte: $end}}]}
+  ) {
+    count_id
+    __typename
+  }
+}

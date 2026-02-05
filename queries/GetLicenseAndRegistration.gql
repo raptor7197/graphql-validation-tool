@@ -1,0 +1,7 @@
+query GetLicenseAndRegistration($customerId: String!) {
+  license_and_registration(where: { customer_id: { _eq: $customerId } }) {
+    id
+    license_registration_fileobject_id
+    __typename
+  }
+}

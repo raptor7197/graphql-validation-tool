@@ -1,0 +1,18 @@
+{
+  "input": {
+    "supplier_name": "",
+    "supplier_address": "",
+    "supplier_contact_name": "",
+    "supplier_contact_number": "",
+    "supplier_contact_email": "",
+    "operational_contact_name": "",
+    "operational_contact_number": "",
+    "operational_contact_email": "",
+    "size": "",
+    "credit_limit": 0.0,
+    "currency_for_credit_limit": "",
+    "country_of_incorporation": "",
+    "insured": false,
+    "blacklisted": false
+  }
+}

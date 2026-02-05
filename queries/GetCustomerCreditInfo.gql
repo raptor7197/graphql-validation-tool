@@ -1,0 +1,22 @@
+query GetCustomerCreditInfo($customerId: String!) {
+  customers(where: {id: {_eq: $customerId}}) {
+    credit_limit
+    currency_for_credit_limit
+    __typename
+  }
+  orders_customers_onlink(
+    where: {customer_id: {_eq: $customerId}, order: {status: {_neq: "Payment Received"}}}
+  ) {
+    order {
+      lineitems_order_on_product_link {
+        supply_quantity
+        sale_price_per_uom
+        conversion_factor
+        __typename
+      }
+      order_currency
+      __typename
+    }
+    __typename
+  }
+}

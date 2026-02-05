@@ -1,0 +1,11 @@
+query GetOrderByEnquiryId($enquiryId: String!) {
+  orders(where: {enquiry_id: {_eq: $enquiryId}}, orderBy: {created_at: desc}) {
+    id
+    unique_text_id
+    status
+    date_of_order
+    exchange_rate
+    supplier_exchange_rate
+    __typename
+  }
+}

@@ -1,0 +1,6 @@
+query GetConvertedEnquiriesCount {
+  orders(where: {enquiry_id: {_is_null: false}}) {
+    count_id
+    __typename
+  }
+}

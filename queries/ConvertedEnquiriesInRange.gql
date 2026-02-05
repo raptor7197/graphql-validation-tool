@@ -1,0 +1,8 @@
+query ConvertedEnquiriesInRange($start: date, $end: date) {
+  orders(
+    where: {_and: [{enquiry_id: {_is_null: false}}, {date_of_order: {_gte: $start}}, {date_of_order: {_lte: $end}}]}
+  ) {
+    count_id
+    __typename
+  }
+}

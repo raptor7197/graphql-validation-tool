@@ -1,0 +1,19 @@
+mutation InsertOrderLineItems($line_items: [insertlineitems_order_on_product_linkInput!]!) {
+  lineitems_order_on_product_link(insert: $line_items) {
+    id
+    product_id
+    specification_id
+    uom
+    supply_quantity
+    quantity_minimum
+    quantity_maximum
+    purchase_price_per_uom
+    sale_price_per_uom
+    transportation_invoice_eligibility
+    transportation_cost_per_uom
+    surveyor_cost_applicability
+    surveyor_cost_per_uom
+    conversion_factor
+    __typename
+  }
+}

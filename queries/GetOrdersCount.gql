@@ -1,0 +1,6 @@
+query GetOrdersCount {
+  orders {
+    count_id
+    __typename
+  }
+}

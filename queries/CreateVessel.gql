@@ -1,0 +1,10 @@
+mutation CreateVessel($input: insertvesselsInput!) {
+  vessels(insert: $input) {
+    name
+    imo
+    status
+    dead_weight
+    ship_type
+    __typename
+  }
+}

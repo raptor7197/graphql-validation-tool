@@ -1,0 +1,21 @@
+query GetOrdersBySupplier($supplierId: String!) {
+  orders_suppliers_onlink(
+    where: {supplier_id: {_eq: $supplierId}, order: {status: {_neq: "Payment Received"}}, orderBy: {created_at: desc}}
+  ) {
+    order {
+      id
+      unique_text_id
+      lineitems_order_on_product_link {
+        supply_quantity
+        sale_price_per_uom
+        conversion_factor
+        __typename
+      }
+      order_currency
+      exchange_rate
+      supplier_exchange_rate
+      __typename
+    }
+    __typename
+  }
+} 

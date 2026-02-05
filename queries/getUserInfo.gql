@@ -1,0 +1,11 @@
+# Welcome to GraphJin Web
+
+# Use this editor to build and test your GraphQL queries
+# Set a query name if you want the query saved to the
+# allow list to use in production
+
+query getUserInfo {
+  users(id: 1) {
+    id
+  }
+}

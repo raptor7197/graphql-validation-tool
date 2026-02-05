@@ -1,0 +1,6 @@
+query GetSuppliersCount {
+  suppliers {
+    count_id
+    __typename
+  }
+}

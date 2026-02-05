@@ -1,0 +1,6 @@
+query GetEnquiriesMaxId {
+  enquiries {
+    max_id
+    __typename
+  }
+}

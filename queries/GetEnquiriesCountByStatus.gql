@@ -1,0 +1,6 @@
+query GetEnquiriesCountByStatus($status: String!) {
+  enquiries(where: {status: {_eq: $status}}) {
+    count_id
+    __typename
+  }
+}

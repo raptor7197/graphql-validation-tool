@@ -1,0 +1,17 @@
+mutation UpdateEnquiryScalar($id: ID!, $input: updateenquiriesInput!) {
+  enquiries(update: $input, where: {id: {_eq: $id}}) {
+    status
+    date_of_enquiry
+    vessel_id
+    trader_id
+    port_of_supply_id
+    duty_paid
+    laycan_start_date
+    laycan_end_date
+    notes
+    created_at
+    updated_at
+    unique_text_id
+    __typename
+  }
+}

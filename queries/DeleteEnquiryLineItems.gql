@@ -1,0 +1,6 @@
+mutation DeleteEnquiryLineItems($enquiry_id: ID!) {
+  enquiry_line_items_onlink(delete: true, where: {enquiry_id: {_eq: $enquiry_id}}) {
+    id
+    __typename
+  }
+}

@@ -1,0 +1,6 @@
+query GetOrdersCountByStatus($status: String!) {
+  orders(where: {status: {_eq: $status}}) {
+    count_id
+    __typename
+  }
+}

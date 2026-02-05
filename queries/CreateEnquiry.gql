@@ -1,0 +1,18 @@
+mutation CreateEnquiry($input: insertenquiriesInput!) {
+  enquiries(insert: $input) {
+    id
+    unique_text_id
+    status
+    date_of_enquiry
+    vessel_id
+    trader_id
+    port_of_supply_id
+    duty_paid
+    laycan_start_date
+    laycan_end_date
+    notes
+    created_at
+    updated_at
+    __typename
+  }
+}

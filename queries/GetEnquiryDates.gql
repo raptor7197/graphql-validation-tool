@@ -1,0 +1,6 @@
+query GetEnquiryDates {
+  enquiries {
+    id
+    date_of_enquiry
+  }
+}

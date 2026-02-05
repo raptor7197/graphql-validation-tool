@@ -1,0 +1,6 @@
+mutation BulkCreateEnquiryLineItems($inputs: [insertenquiry_line_items_onlinkInput!]!) {
+  enquiry_line_items_onlink(insert: $inputs) {
+    id
+    __typename
+  }
+}

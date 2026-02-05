@@ -1,0 +1,12 @@
+query EnquiriesForPortInRange($start: String, $end: String) {
+  enquiries(
+    where: {_and: [{date_of_enquiry: {_gte: $start}}, {date_of_enquiry: {_lte: $end}}]}
+  ) {
+    port_of_supply {
+      id
+      name
+      __typename
+    }
+    __typename
+  }
+}

@@ -1,0 +1,6 @@
+mutation createOrganization($orgName: String) {
+  organization(insert: { name: $orgName }) {
+    id
+    name
+  }
+}

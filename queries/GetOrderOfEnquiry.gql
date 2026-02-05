@@ -1,0 +1,6 @@
+query GetOrderOfEnquiry($id: String!) {
+  orders(where: { enquiry_id: { _eq: $id } }) {
+    order_number
+    __typename
+  }
+}

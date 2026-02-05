@@ -1,0 +1,22 @@
+query SearchUsers($searchTerm: String, $limit: Int!, $offset: Int!) {
+  users(
+    where: {_or: [
+      {first_name: {_ilike: $searchTerm}},
+      {last_name: {_ilike: $searchTerm}},
+      {email: {_ilike: $searchTerm}},SearchUsers
+      {phone: {_ilike: $searchTerm}}
+    ]}
+    limit: $limit
+    offset: $offset
+    orderBy: {first_name: asc}
+  ) {
+    id
+    nimbus_user_id
+    first_name
+    last_name
+    email
+    phone
+    updated_time
+    __typename
+  }
+}

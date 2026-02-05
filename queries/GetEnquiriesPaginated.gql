@@ -1,0 +1,75 @@
+query GetEnquiriesPaginated($limit: Int!, $offset: Int!) {
+  enquiries(limit: $limit, offset: $offset, orderBy: {date_of_enquiry: desc}) {
+    id
+    unique_text_id
+    status
+    date_of_enquiry
+    trader {
+      nimbus_user_id
+      first_name
+      last_name
+      email
+      phone
+      external_id
+      __typename
+    }
+    vessel {
+      id
+      name
+      imo
+      status
+      __typename
+    }
+    port_of_supply {
+      id
+      name
+      country
+      status
+      __typename
+    }
+    duty_paid
+    laycan_start_date
+    laycan_end_date
+    notes
+    enquiries_customers_onlink {
+      customer_id
+      customer {
+        id
+        customer_name
+        customer_address
+        customer_contact_name
+        customer_contact_number
+        customer_contact_email
+        operational_contact_name
+        operational_contact_number
+        operational_contact_email
+        size
+        credit_limit
+        currency_for_credit_limit
+        __typename
+      }
+      __typename
+    }
+    enquiry_line_items_onlink {
+      id
+      enquiry_id
+      product_id
+      specification_id
+      uom_of_supply
+      quantity_minimum
+      quantity_maximum
+      product {
+        id
+        name
+        __typename
+      }
+      specification {
+        id
+        specification
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+}

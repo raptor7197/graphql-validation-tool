@@ -1,0 +1,6 @@
+mutation DeleteOrderSupplierLinks($order_id: String!) {
+  orders_suppliers_onlink(delete: true, where: {order_id: {_eq: $order_id}}) {
+    id
+    __typename
+  }
+}

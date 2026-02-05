@@ -1,0 +1,8 @@
+mutation CreatePort($input: insertportsInput!) {
+  ports(insert: $input) {
+    name
+    country
+    status
+    __typename
+  }
+}

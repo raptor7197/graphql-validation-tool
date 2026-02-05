@@ -1,0 +1,9 @@
+query GetPortsOfSupply {
+  ports(orderBy: {name: asc}) {
+    id
+    name
+    country
+    status
+    __typename
+  }
+}

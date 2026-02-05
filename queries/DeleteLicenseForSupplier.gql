@@ -1,0 +1,6 @@
+mutation DeleteLicenseForSupplier($supplierId: String!) {
+  license_and_registration(delete: true, where: {supplier_id: {_eq: $supplierId}}) {
+    id
+    __typename
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "input": {
+    "status": "",
+    "date_of_enquiry": "",
+    "vessel_id": 0.0,
+    "port_of_supply_id": 0.0,
+    "customer_ids": [],
+    "trader_id": 0.0,
+    "duty_paid": "",
+    "laycan_start_date": "",
+    "laycan_end_date": "",
+    "products": [
+      {
+        "product_name": "",
+        "specification": "",
+        "uom": "",
+        "quantity_min": 0.0,
+        "quantity_max": 0.0
+      }
+    ],
+    "notes": ""
+  }
+}

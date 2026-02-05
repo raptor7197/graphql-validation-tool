@@ -1,0 +1,6 @@
+mutation CreateOrder($input: insertordersInput!) {
+  orders(insert: $input) {
+    exchange_rate
+    __typename
+  }
+}

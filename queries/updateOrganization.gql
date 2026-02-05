@@ -1,0 +1,8 @@
+mutation updateOrganization($organizationID: ID, $organizationName: String) {
+  organization(
+    update: { name: $organizationName }
+    where: { id: { equals: $organizationID } }
+  ) {
+    id
+  }
+}

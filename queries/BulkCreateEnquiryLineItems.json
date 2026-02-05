@@ -1,0 +1,12 @@
+{
+  "inputs": [
+    {
+      "enquiry_id": 0.0,
+      "product_id": 0.0,
+      "specification_id": 0.0,
+      "uom_of_supply": "",
+      "quantity_minimum": 0.0,
+      "quantity_maximum": 0.0
+    }
+  ]
+}
