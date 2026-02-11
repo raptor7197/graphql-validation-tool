@@ -83,6 +83,18 @@ func runValidate(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("invalid configuration: %w", err)
 	}
 
+	// Resolve absolute paths
+	absQueriesDir, err := filepath.Abs(queriesDir)
+	if err != nil {
+		return fmt.Errorf("failed to resolve queries directory path: %w", err)
+	}
+	queriesDir = absQueriesDir
+
+	// Check for standard directory name
+	if filepath.Base(queriesDir) != "queries" {
+		fmt.Printf("Warning: queries directory name '%s' is not standard (expected 'queries'). This might cause issues with GraphJin configuration loading.\n", filepath.Base(queriesDir))
+	}
+
 	// Initialize GraphJin
 	gj, db, err := initializeGraphJin(config)
 	if err != nil {
@@ -95,11 +107,22 @@ func runValidate(cmd *cobra.Command, args []string) error {
 
 	if queryFile != "" {
 		// Validate single file
+		absQueryFile, err := filepath.Abs(queryFile)
+		if err != nil {
+			return fmt.Errorf("failed to resolve query file path: %w", err)
+		}
+		queryFile = absQueryFile
+
 		if _, err := os.Stat(queryFile); os.IsNotExist(err) {
 			return fmt.Errorf("query file not found: %s", queryFile)
 		}
 		queryFiles = []string{queryFile}
 	} else {
+		// Check if directory exists
+		if _, err := os.Stat(queriesDir); os.IsNotExist(err) {
+			return fmt.Errorf("queries directory not found: %s", queriesDir)
+		}
+
 		// Find all query files in directory
 		queryFiles, err = findQueryFiles(queriesDir)
 		if err != nil {
@@ -108,12 +131,12 @@ func runValidate(cmd *cobra.Command, args []string) error {
 	}
 
 	if len(queryFiles) == 0 {
-		fmt.Println("No query files found")
+		fmt.Printf("No query files found in %s\n", queriesDir)
 		return nil
 	}
 
 	if verbose {
-		fmt.Printf("Found %d query file(s) to validate\n\n", len(queryFiles))
+		fmt.Printf("Found %d query file(s) to validate in %s\n\n", len(queryFiles), queriesDir)
 	}
 
 	// Run validation
@@ -148,6 +171,7 @@ func initializeGraphJin(config *Config) (*graphjin.GraphJin, *sql.DB, error) {
 		Debug:            verbose,
 		Production:       config.Production,
 		DisableAllowList: true,
+		ConfigPath:       "empty_config",
 		DefaultBlock:     false,
 	}
 
@@ -212,14 +236,6 @@ func validateSingleQuery(gj *graphjin.GraphJin, queryPath string) TestResult {
 
 	start := time.Now()
 
-	// Read query file
-	query, err := os.ReadFile(queryPath)
-	if err != nil {
-		result.Errors = append(result.Errors, fmt.Sprintf("Failed to read query file: %v", err))
-		result.Duration = time.Since(start).Milliseconds()
-		return result
-	}
-
 	// Look for corresponding JSON file with variables
 	var jsonFile string
 	if strings.HasSuffix(queryPath, ".graphql") {
@@ -250,15 +266,29 @@ func validateSingleQuery(gj *graphjin.GraphJin, queryPath string) TestResult {
 		variables = json.RawMessage("{}")
 	}
 
+	// Read query file content
+	query, err := os.ReadFile(queryPath)
+	if err != nil {
+		result.Errors = append(result.Errors, fmt.Sprintf("Failed to read query file: %v", err))
+		result.Duration = time.Since(start).Milliseconds()
+		return result
+	}
+
 	// Execute query
-	ctx := context.Background()
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+
 	res, err := gj.GraphQL(ctx, string(query), variables, nil)
 
 	result.Duration = time.Since(start).Milliseconds()
 
 	// Check for execution errors
 	if err != nil {
-		result.Errors = append(result.Errors, fmt.Sprintf("Execution error: %v", err))
+		if err == context.DeadlineExceeded {
+			result.Errors = append(result.Errors, "Execution timed out after 30s")
+		} else {
+			result.Errors = append(result.Errors, fmt.Sprintf("Execution error: %v", err))
+		}
 	}
 
 	// Check for GraphQL errors in the response
