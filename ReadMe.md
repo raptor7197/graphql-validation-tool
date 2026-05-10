@@ -1,6 +1,9 @@
 # GraphQL Validation Tool (gql-validate)
 
 A powerful command-line tool for validating GraphQL queries against a PostgreSQL database using GraphJin.
+```bash
+connect to docker image - docker run --name testdb -p 5432:5432 -e POSTGRES_PASSOWRD=testpswd postgres
+```bash
 
 ## Features
 
@@ -20,7 +23,7 @@ A powerful command-line tool for validating GraphQL queries against a PostgreSQL
 ### From Source
 
 ```bash
-git clone https://github.com/your-repo/graphql-validation-tool.git
+git clone https://github.com/raptor7197/graphql-validation-tool.git
 cd graphql-validation-tool
 go build -o gql-validate .
 ```
